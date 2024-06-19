@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
-import { FlatList, StyleSheet, View, Text, Modal, Alert } from 'react-native'
-import CustomButton from '../components/customButton'
+// src/screens/Home.js
+import React, { useState } from 'react';
+import { FlatList, StyleSheet, View, Text, Modal } from 'react-native';
+import CustomButton from '../components/customButton';
 
 const NoteCard = ({ item, setCurrentPage, setCurrentNote, deleteNote }) => {
    const [modalVisible, setModalVisible] = useState(false);
@@ -26,8 +27,8 @@ const NoteCard = ({ item, setCurrentPage, setCurrentNote, deleteNote }) => {
                fontSize={12}
                width={100}
                onPress={() => {
-                  setCurrentNote(item)
-                  setCurrentPage('edit')
+                  setCurrentNote(item);
+                  setCurrentPage('edit');
                }}
             />
             <CustomButton
@@ -42,15 +43,14 @@ const NoteCard = ({ item, setCurrentPage, setCurrentNote, deleteNote }) => {
          <Modal
             transparent={true}
             visible={modalVisible}
-            onRequestClose={() => {
-               setModalVisible(!modalVisible);
-            }}
+            onRequestClose={() => setModalVisible(!modalVisible)}
          >
             <View style={styles.centeredView}>
                <View style={styles.modalView}>
                   <Text style={styles.modalText}>Apakah Anda yakin ingin menghapus catatan ini?</Text>
                   <View style={styles.modalButtons}>
                      <CustomButton
+                        style={styles.ya}
                         backgroundColor="#D82148"
                         color="#fff"
                         text="Ya"
@@ -71,8 +71,8 @@ const NoteCard = ({ item, setCurrentPage, setCurrentNote, deleteNote }) => {
             </View>
          </Modal>
       </View>
-   )
-}
+   );
+};
 
 const Home = ({ noteList, setCurrentPage, setCurrentNote, deleteNote }) => (
    <View style={styles.container}>
@@ -81,9 +81,7 @@ const Home = ({ noteList, setCurrentPage, setCurrentNote, deleteNote }) => (
          color="#203239"
          text="Tambahkan Note"
          width="100%"
-         onPress={() => {
-            setCurrentPage('add')
-         }}
+         onPress={() => setCurrentPage('add')}
       />
       <FlatList
          showsVerticalScrollIndicator={false}
@@ -94,13 +92,11 @@ const Home = ({ noteList, setCurrentPage, setCurrentNote, deleteNote }) => (
          keyExtractor={(item) => item.id.toString()}
       />
    </View>
-)
+);
 
 const styles = StyleSheet.create({
    container: {
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
+      flex: 1,
       padding: 20,
       marginTop: 20,
    },
@@ -119,7 +115,6 @@ const styles = StyleSheet.create({
    },
    buttons: {
       marginTop: 10,
-      display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-evenly',
    },
@@ -149,9 +144,13 @@ const styles = StyleSheet.create({
       textAlign: 'center',
    },
    modalButtons: {
+      // margin: 10,
       flexDirection: 'row',
       justifyContent: 'space-between',
    },
-})
+   ya: {
+      justifyContent: 'space-between',
+   },
+});
 
-export default Home
+export default Home;
